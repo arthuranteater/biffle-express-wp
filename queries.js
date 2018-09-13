@@ -9,7 +9,19 @@ function ListAll() {
 }
 
 module.exports = {
+  create(callItWhatYouWill) {
+    return database("students").insert(callItWhatYouWill);
+  },
   list() {
     return knex("classmates");
+  },
+  getById(id) {
+    return knex
+      .select()
+      .from("classmates")
+      .where("id", id);
+  },
+  createStudent(student) {
+    return knex("classmates").insert(student, ["id", "firstName", "lastName"]);
   }
 };
