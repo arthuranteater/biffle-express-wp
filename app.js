@@ -1,11 +1,12 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3003;
 const queries = require("./queries.js");
-const bodyParser = require("body-parser");
-const cors = kjkj;
-app.use(cors);
+
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get("/", (request, response) => {
   queries.list().then(result => response.json({ result }));
@@ -17,10 +18,7 @@ app.get("/:id", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  queries
-    .createStudent({ first: "hello", last: "goodbye" })
-    .then(data => res.json({ data }));
-  console.log(req.body);
+  queries.createStudent(req.body).then(data => res.json({ data }));
   //res.send("😜");
 });
 
