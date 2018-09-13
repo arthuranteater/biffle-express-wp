@@ -22,6 +22,17 @@ app.post("/", (req, res) => {
   //res.send("😜");
 });
 
+app.delete("/:id", (req, res) => {
+  //res.send("😜");
+  queries.deleteStudent(req.params.id).then(data => res.json({ data }));
+});
+
+app.put("/:id", (req, res) => {
+  queries
+    .updateStudent(req.params.id, req.body)
+    .then(data => res.json({ data }));
+});
+
 app.listen(port, () => console.log(`listening on ${port}`));
 
 // We will be writing our routes in this file

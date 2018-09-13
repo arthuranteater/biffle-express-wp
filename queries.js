@@ -23,5 +23,21 @@ module.exports = {
   },
   createStudent(student) {
     return knex("classmates").insert(student, ["id", "firstName", "lastName"]);
+  },
+  deleteStudent(id) {
+    return knex
+      .select()
+      .from("classmates")
+      .where("id", id)
+      .del()
+      .returning("*");
+  },
+  updateStudent(id, body) {
+    return knex
+      .select()
+      .from("classmates")
+      .where("id", id)
+      .update(body)
+      .returning("*");
   }
 };
